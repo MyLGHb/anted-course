@@ -1,3 +1,4 @@
+//路由匹配到会继续往里匹配，所以后面与layout同级的路径访问无效
 export default {
   singular: true,
   routes: [{
@@ -7,6 +8,14 @@ export default {
       {
         path: 'helloworld',
         component: './HelloWorld'
+      },
+      {
+        path: '/dashboard',
+        routes: [
+          { path: 'analysis', component: 'Dashboard/Analysis' },
+          { path: 'monitor', component: 'Dashboard/Monitor' },
+          { path: 'workplace', component: 'Dashboard/Workplace' }
+        ]
       },
     ]
   },
