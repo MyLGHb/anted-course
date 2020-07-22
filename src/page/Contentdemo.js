@@ -1,4 +1,3 @@
-// import React from 'react';
 import ShoppingList from './ShoppingList.js';
 
 class Content extends React.Component {

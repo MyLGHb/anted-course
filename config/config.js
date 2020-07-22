@@ -3,6 +3,10 @@ export default {
   routes: [{
     path: '/',
     component: './HelloWorld',
+  },
+  {
+    path: '/test',
+    component: './DemoTestPage',
   }],
   antd: {},
 };
