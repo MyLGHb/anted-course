@@ -17,6 +17,7 @@ export default {
           { path: 'workplace', component: 'Dashboard/Workplace' }
         ]
       },
+      { path: 'puzzlecards', component: './puzzlecards' },
     ]
   },
   {
@@ -32,4 +33,5 @@ export default {
     component: './HelloWorld',
   }],
   antd: {},
+  dva: {},
 };
