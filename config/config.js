@@ -32,6 +32,13 @@ export default {
     path: '/hello',
     component: './HelloWorld',
   }],
+  proxy: {
+    '/dev': {
+      target: 'http://jsonplaceholder.typicode.com',
+      changeOrigin: true,
+      pathRewrite: { "^/dev": "" }
+    },
+  },
   antd: {},
   dva: {},
 };

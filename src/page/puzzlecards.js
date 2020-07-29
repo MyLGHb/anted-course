@@ -60,9 +60,9 @@ export default class PuzzleCardsPage extends Component {
           this.props.cardList.map(card => {
             return (
               <Card key={card.id}>
-                <div>Q: {card.setup}</div>
+                <div>Q: {card.title}</div>
                 <div>
-                  <strong>A: {card.punchline}</strong>
+                  <strong>A: {card.body}</strong>
                 </div>
               </Card>
             );

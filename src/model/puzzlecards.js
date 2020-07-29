@@ -20,7 +20,7 @@ export default {
   effects: {
     *queryInitCards(_, sagaEffects) {
       const {call, put} = sagaEffects;
-      const endPointURI = 'https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_joke';
+      const endPointURI = '/dev/posts/1';
       
       
       const puzzle = yield call(request, endPointURI);
