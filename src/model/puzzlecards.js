@@ -4,6 +4,7 @@
  */
 
 import request from '../util/request';
+import { message } from 'antd';
 
 const delay = (millisecond) => {
   return new Promise((resolve) => {
@@ -22,14 +23,18 @@ export default {
       const {call, put} = sagaEffects;
       const endPointURI = '/dev/posts/1';
       
-      
-      const puzzle = yield call(request, endPointURI);
-      yield put({ type: 'addNewCard', payload: puzzle });
-      
-      yield call(delay, 3000);
+      try {
+        const puzzle = yield call(request, endPointURI);
+        yield put({ type: 'addNewCard', payload: puzzle });
+        
+        yield call(delay, 3000);
 
-      const puzzle2 = yield call(request, endPointURI);
-      yield put({ type: 'addNewCard', payload: puzzle2 });
+        const puzzle2 = yield call(request, endPointURI);
+        yield put({ type: 'addNewCard', payload: puzzle2 });
+      } catch (e) {
+        message.error('数据获取失败'); // 打印错误信息
+      };
+      
     }
   },
   reducers: {
