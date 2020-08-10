@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Modal, Button, Form, Input } from 'antd';
 import { connect } from 'dva';
+import SampleChart from '../../component/SampleChart';
 
 const FormItem = Form.Item;
 
@@ -8,6 +9,7 @@ function mapStateToProps(state) {
   return {
     cardsList: state.cards.cardsList,
     cardsLoading: state.loading.effects['cards/queryList'],
+    statistic: state.cards.statistic,
   };
 };
 
@@ -16,6 +18,7 @@ class List extends React.Component {
   state = {
     id: null,
     visible: false,
+    statisticVisible: false,
   };
 
   formRef = React.createRef();
@@ -50,6 +53,23 @@ class List extends React.Component {
     });
   };
 
+  //图表相关
+  showStatistic = (id) => {
+    console.log(id)
+    this.props.dispatch({
+      type: 'cards/getStatistic',
+      payload: id,
+    });
+    console.log(this.props.statistic)
+    // 更新 state，弹出包含图表的对话框
+    this.setState({ id, statisticVisible: true });
+  };
+  handleStatisticCancel = () => {
+    this.setState({
+      statisticVisible: false,
+    });
+  }
+
   columns = [
     {
       title: '名称',
@@ -64,11 +84,20 @@ class List extends React.Component {
       dataIndex: 'url',
       render: value => <a href={value}>{value}</a>,
     },
+    {
+      title: '',
+      dataIndex: '_',
+      render: (_, { id }) => {
+        return (
+          <Button onClick={() => { this.showStatistic(id); }}>图表</Button>
+        );
+      },
+    },
   ];
 
   render() {
-    const { cardsList, cardsLoading } = this.props;
-    const { visible, id } = this.state;
+    const { cardsList, cardsLoading, statistic } = this.props;
+    const { visible, id, statisticVisible } = this.state;
 
     return (
       <div>
@@ -90,6 +119,9 @@ class List extends React.Component {
               <Input />
             </FormItem>
           </Form>
+        </Modal>
+        <Modal visible={statisticVisible} footer={null} onCancel={this.handleStatisticCancel}>
+          <SampleChart data={statistic[id] ? statistic[id]:[]} />
         </Modal>
       </div>
     );

@@ -19,6 +19,14 @@ let data = [
   }
 ];
 
+let chartData = [
+  { genre: 'Sports', sold: 275 },
+  { genre: 'Strategy', sold: 1150 },
+  { genre: 'Action', sold: 120 },
+  { genre: 'Shooter', sold: 350 },
+  { genre: 'Other', sold: 150 },
+];
+
 export default {
   'get /api/cards': function (req, res, next) {
     setTimeout(() => {
@@ -49,13 +57,7 @@ export default {
   },
   'get /api/cards/:id/statistic': function (req, res, next) {
     res.json({
-      result: [
-        { genre: 'Sports', sold: 275 },
-        { genre: 'Strategy', sold: 1150 },
-        { genre: 'Action', sold: 120 },
-        { genre: 'Shooter', sold: 350 },
-        { genre: 'Other', sold: 150 },
-      ]
+      result: chartData,
     });
   },
 }

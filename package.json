@@ -14,5 +14,8 @@
   "devDependencies": {
     "@umijs/preset-react": "^1.5.19",
     "umi": "^3.2.10"
+  },
+  "dependencies": {
+    "@antv/g2": "^4.0.14"
   }
 }
