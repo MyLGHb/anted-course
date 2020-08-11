@@ -1,0 +1,9 @@
+
+// global语法：允许我们声明一个 class 名称不可被改写。
+// global 不应该被滥用，特别地我们建议：若想在某个文件中覆盖 antd 样式，
+// 请加上一个类似 .override-ant-btn 的类包裹住 global 修饰的名称，以避免全局样式声明分散在项目各处。
+.override-ant-btn {
+  :global(.ant-btn) {
+    border-radius: 16px;
+  }
+}

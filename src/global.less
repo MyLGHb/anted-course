@@ -1,0 +1,21 @@
+/*
+
+使用 umi 的话，有一个专门的文件 global.less 来让我们书写全局样式。
+这个文件并不会被 CSS modules 处理。
+
+一个用途是全局性地定义 HTML 标签的样式，比如写入：
+p {
+  margin: 0;
+}
+
+另外一个用途是全局性地覆盖第三方库的样式，比如 antd 中的样式 。
+.ant-btn {
+  box-shadow: 0 7px 7px rgba(0, 0, 0, .5);
+}
+
+*/
+
+//添加了按钮阴影(暂时无效)
+.ant-btn {
+  box-shadow: 0 7px 7px rgba(0, 0, 0, .5);
+}
