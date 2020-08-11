@@ -1,0 +1,19 @@
+
+/* 
+  对于 css 文件，
+  不要在值上使用引号；
+  .号要紧跟 hello，定义一个 class 选择器。
+
+  CSS modules 是从工具层面给出的一套生成局部 CSS 的规范，
+  本质还是生成全局唯一的 CSS 定义。webpack 实现了这套规范。
+  umi 依赖 webpack，默认开启了 CSS modules 特性。
+
+  注意：很多 CSS 选择器是不会被 CSS Modules 处理的，
+  比如 body、div 、a 这样的 HTML 标签名就不会。
+  我们推荐如果要定义局部 css 样式/动画， 只使用 class 或 @keyframe
+ */
+.hello {
+  font-size: 32px;
+  font-weight: bold;
+  color: #30b767; /* 绿色 */
+}
