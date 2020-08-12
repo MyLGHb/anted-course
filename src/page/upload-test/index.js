@@ -39,6 +39,11 @@ import React from 'react';
 import { Upload, message, Button, Icon } from 'antd';
 
 class uploademo extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   props = {
     name: 'file',
     action: '//jsonplaceholder.typicode.com/posts/',

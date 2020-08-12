@@ -3,7 +3,7 @@ export default {
   singular: true,
   routes: [
     {
-      path: 'layout',
+      path: '/',
       component: '../layout',
       routes: [
         {
@@ -20,11 +20,11 @@ export default {
         },
         { path: 'puzzlecards', component: './puzzlecards' },
         { path: 'list', component: '../page/list' },
+        { path: 'newworld', component: './NewWorld' },
       ]
     },
     { path: 'test', component: './DemoTestPage', },
     { path: 'card', component: './CardDemo', },
-    { path: 'newworld', component: './NewWorld' },
     { path: 'css-modules-with-less', component: './css-modules-with-less' },
     { path: 'css-modules-with-antd', component: './css-modules-with-antd' },
     { path: 'upload-test', component: './upload-test', },
