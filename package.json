@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "umi test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@umijs/preset-react": "^1.5.19",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.3",
     "umi": "^3.2.10"
   },
   "dependencies": {
