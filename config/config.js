@@ -3,7 +3,7 @@ export default {
   singular: true,
   routes: [
     {
-      path: '/layout',
+      path: 'layout',
       component: '../layout',
       routes: [
         {
@@ -11,7 +11,7 @@ export default {
           component: './HelloWorld'
         },
         {
-          path: '/dashboard',
+          path: 'dashboard',
           routes: [
             { path: 'analysis', component: 'Dashboard/Analysis' },
             { path: 'monitor', component: 'Dashboard/Monitor' },
@@ -22,17 +22,12 @@ export default {
         { path: 'list', component: '../page/list' },
       ]
     },
-    {
-      path: '/test',
-      component: './DemoTestPage',
-    },
-    {
-      path: '/card',
-      component: './CardDemo',
-    },
+    { path: 'test', component: './DemoTestPage', },
+    { path: 'card', component: './CardDemo', },
     { path: 'newworld', component: './NewWorld' },
     { path: 'css-modules-with-less', component: './css-modules-with-less' },
     { path: 'css-modules-with-antd', component: './css-modules-with-antd' },
+    { path: 'upload-test', component: './upload-test', },
   ],
   proxy: {
     '/dev': {
@@ -44,9 +39,9 @@ export default {
   antd: {},
   dva: {},
   // 加入 theme 定义
-  theme: {
-    "@primary-color": "#30b767", // 绿色
-  },
+  // theme: {
+  //   "@primary-color": "#30b767", // 绿色
+  // },
 };
 
 /**
