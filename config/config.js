@@ -41,6 +41,11 @@ export default {
       changeOrigin: true,
       pathRewrite: { "^/dev": "" }
     },
+    '/con': {
+      target: 'http://localhost:9002',
+      changeOrigin: true,
+      pathRewrite: { "^/con": "" }
+    },
   },
   antd: {},
   dva: {},

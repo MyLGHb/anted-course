@@ -1,24 +1,20 @@
 import React from 'react';
 import { Table, Modal, Button, Form, Input } from 'antd';
 import { connect } from 'dva';
-import SampleChart from '../../component/SampleChart';
 
 const FormItem = Form.Item;
 
 function mapStateToProps(state) {
   return {
-    cardsList: state.cards.cardsList,
-    cardsLoading: state.loading.effects['cards/queryList'],
-    statistic: state.cards.statistic,
+    articleList: state.articles.articleList,
+    dataLoading: state.loading.effects['articles/queryInitArticle']
   };
 };
 
 class List extends React.Component {
 
   state = {
-    id: null,
     visible: false,
-    statisticVisible: false,
   };
 
   formRef = React.createRef();
@@ -49,35 +45,20 @@ class List extends React.Component {
   // 组件加载后执行的方法
   componentDidMount() {
     this.props.dispatch({
-      type: 'cards/queryList',
+      type: 'articles/queryInitArticle',
     });
   };
 
-  //图表相关
-  showStatistic = (id) => {
-    console.log(id)
-    this.props.dispatch({
-      type: 'cards/getStatistic',
-      payload: id,
-    });
-    console.log(this.props.statistic)
-    // 更新 state，弹出包含图表的对话框
-    this.setState({ id, statisticVisible: true });
-  };
-  handleStatisticCancel = () => {
-    this.setState({
-      statisticVisible: false,
-    });
-  }
+
 
   columns = [
     {
       title: '名称',
-      dataIndex: 'name',
+      dataIndex: 'title',
     },
     {
       title: '描述',
-      dataIndex: 'desc',
+      dataIndex: 'content',
     },
     {
       title: '链接',
@@ -87,21 +68,21 @@ class List extends React.Component {
     {
       title: '',
       dataIndex: '_',
-      render: (_, { id }) => {
+      render: () => {
         return (
-          <Button onClick={() => { this.showStatistic(id); }}>图表</Button>
+          <Button onClick={() => { alert(111) }}>查看</Button>
         );
       },
     },
   ];
 
   render() {
-    const { cardsList, cardsLoading, statistic } = this.props;
-    const { visible, id, statisticVisible } = this.state;
+    const { articleList, dataLoading } = this.props;
+    const { visible } = this.state;
 
     return (
       <div>
-        <Table columns={this.columns} dataSource={cardsList} loading={cardsLoading} rowKey="id" />
+        <Table columns={this.columns} dataSource={articleList} loading={dataLoading} rowKey="id" />
         <Button onClick={this.showModal}>新建</Button>
         <Modal 
         visible={visible} 
@@ -109,10 +90,10 @@ class List extends React.Component {
         onOk={this.handleOk}
         title="新建记录">
           <Form ref={this.formRef}>
-            <FormItem label="名称" name="name" rules={[{required:true}]}>
+            <FormItem label="名称" name="title" rules={[{required:true}]}>
               <Input />
             </FormItem>
-            <FormItem label="描述" name="desc">
+            <FormItem label="描述" name="content">
               <Input />
             </FormItem>
             <FormItem label="链接" name="url" rules={[{ type: 'url' }]}>
@@ -120,9 +101,7 @@ class List extends React.Component {
             </FormItem>
           </Form>
         </Modal>
-        <Modal visible={statisticVisible} footer={null} onCancel={this.handleStatisticCancel}>
-          <SampleChart data={statistic[id] ? statistic[id]:[]} />
-        </Modal>
+      
       </div>
     );
   }
