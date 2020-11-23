@@ -30,6 +30,14 @@ class BasicLayout extends Component {
               <Menu.Item key="2"><Link to="/dashboard/analysis">分析页</Link></Menu.Item>
               <Menu.Item key="3"><Link to="/dashboard/monitor">监控页</Link></Menu.Item>
               <Menu.Item key="4"><Link to="/dashboard/workplace">工作台</Link></Menu.Item>
+              <Menu.Item key="5"><Link to="/dashboard/list">清单页</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub2"
+              title={<span><Icon type="dashboard" /><span>artmodel</span></span>}
+            >
+              <Menu.Item key="6"><Link to="/artmodel/articleList">文档页</Link></Menu.Item>
+              <Menu.Item key="7"><Link to="/puzzlecards">卡片页</Link></Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>

@@ -27,12 +27,12 @@ let random_joke_call_count = 0;
 // };
 
 //模拟请求出错
-export default {
-  'get /dev/posts/1': function (req, res) {
-    res.status(500);
-    res.json({});
-  },
-};
+// export default {
+//   'get /dev/posts/1': function (req, res) {
+//     res.status(500);
+//     res.json({});
+//   },
+// };
 
 //如果只需要简单地返回数据，只需要这样
 // export default {

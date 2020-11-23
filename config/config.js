@@ -15,11 +15,17 @@ export default {
           routes: [
             { path: 'analysis', component: 'Dashboard/Analysis' },
             { path: 'monitor', component: 'Dashboard/Monitor' },
-            { path: 'workplace', component: 'Dashboard/Workplace' }
+            { path: 'workplace', component: 'Dashboard/Workplace' },
+            { path: 'list', component: 'list' }
+          ]
+        },
+        {
+          path: 'artmodel',
+          routes: [
+            {path: 'articleList', component: 'Artmodel/ArticleList'}
           ]
         },
         { path: 'puzzlecards', component: './puzzlecards' },
-        { path: 'list', component: '../page/list' },
         { path: 'newworld', component: './NewWorld' },
       ]
     },
