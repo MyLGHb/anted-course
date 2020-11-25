@@ -1,4 +1,4 @@
-import request from '../util/request';
+import * as articleService from '../service/article';
 import { message } from 'antd';
 
 export default {
@@ -7,14 +7,12 @@ export default {
     articleList: [],
   },
   effects: {
-    *queryInitArticle(_, sagaEffects) {
+    *queryInitArticle({ payload }, sagaEffects) {
       const {call, put} = sagaEffects;
-      const endPointURI = '/con/article';
-      
       try {
-        const res = yield call(request, endPointURI);
-        const articleList = res.data;
-        yield put({ type: 'addArticleData', payload: articleList });
+        const res = yield call(articleService.queryList,payload.page,payload.size,payload.searchData);
+        const articleList = res.data.rows;
+        yield put({ type: 'addArticleData', payload: {articleList} });
       } catch (e) {
         message.error('数据获取失败'); // 打印错误信息
       };
@@ -22,7 +20,7 @@ export default {
     }
   },
   reducers: {
-    addArticleData(state, { payload: articleList }) {
+    addArticleData(state, { payload: {articleList} }) {
       return {
         ...state,
         articleList,

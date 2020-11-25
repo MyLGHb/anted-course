@@ -27,7 +27,14 @@ class List extends React.Component {
     this.setState({
       visible: false,
     });
-  }
+  };
+
+  handleTableChange = (pagination, filters, sorter) => {
+    console.log(pagination);
+    this.queryParam.page = pagination.current;
+    this.queryParam.size = pagination.pageSize;
+    this.loadData();
+  };
 
   handleOk = () => {
     const { dispatch } = this.props;
@@ -40,14 +47,20 @@ class List extends React.Component {
       // 重置 `visible` 属性为 false 以关闭对话框
       this.setState({ visible: false });
     }).catch(err => console.log(err));
-  }
+  };
 
   // 组件加载后执行的方法
   componentDidMount() {
+    this.loadData();
+  };
+
+  loadData() {
+    const queryParam = this.queryParam;
     this.props.dispatch({
       type: 'articles/queryInitArticle',
-    });
-  };
+      payload: queryParam,
+    }).catch(err => console.log(err));
+  }
 
 
 
@@ -76,13 +89,33 @@ class List extends React.Component {
     },
   ];
 
+  queryParam = {
+    page: '1',
+    size: '5',
+    searchData: {}
+  }
+
+  pagination = {
+    defaultPageSize: 5,
+    showTotal: total => `共有 ${total} 条数据`,
+    pageSizeOptions: ['10', '20', '50', '100'],
+    showSizeChanger: true
+  };
+
   render() {
     const { articleList, dataLoading } = this.props;
     const { visible } = this.state;
 
     return (
       <div>
-        <Table columns={this.columns} dataSource={articleList} loading={dataLoading} rowKey="id" />
+        <Table 
+          columns={this.columns} 
+          dataSource={articleList} 
+          loading={dataLoading} 
+          onChange={this.handleTableChange}
+          pagination={this.pagination}
+          rowKey="id" />
+
         <Button onClick={this.showModal}>新建</Button>
         <Modal 
         visible={visible} 
