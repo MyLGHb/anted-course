@@ -5,6 +5,7 @@ export default {
   namespace: 'articles',
   state: {
     articleList: [],
+    total: 0,
   },
   effects: {
     *queryInitArticle({ payload }, sagaEffects) {
@@ -12,18 +13,27 @@ export default {
       try {
         const res = yield call(articleService.queryList,payload.page,payload.size,payload.searchData);
         const articleList = res.data.rows;
-        yield put({ type: 'addArticleData', payload: {articleList} });
+        const total = res.data.total;
+        yield put({ type: 'addArticleData', payload: {articleList, total} });
       } catch (e) {
         message.error('数据获取失败'); // 打印错误信息
-      };
-      
+      }; 
+    },
+    *addOne({ payload }, {call}) {
+      try {
+        const res =  yield call(articleService.add,payload);
+        return res;
+      } catch (e) {
+        message.error('数据添加失败');
+      }
     }
   },
   reducers: {
-    addArticleData(state, { payload: {articleList} }) {
+    addArticleData(state, { payload: {articleList, total} }) {
       return {
         ...state,
         articleList,
+        total,
       };
     }
   },

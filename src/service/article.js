@@ -9,3 +9,13 @@ export function queryList(page,size,searchData) {
     body: JSON.stringify(searchData)
   });
 }
+
+export function add(data) {
+  return request(`/con/article`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+}

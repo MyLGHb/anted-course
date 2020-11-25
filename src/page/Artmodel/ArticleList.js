@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Modal, Button, Form, Input } from 'antd';
+import { Table, Modal, Button, Form, Input, message } from 'antd';
 import { connect } from 'dva';
 
 const FormItem = Form.Item;
@@ -7,6 +7,7 @@ const FormItem = Form.Item;
 function mapStateToProps(state) {
   return {
     articleList: state.articles.articleList,
+    total: state.articles.total,
     dataLoading: state.loading.effects['articles/queryInitArticle']
   };
 };
@@ -41,8 +42,12 @@ class List extends React.Component {
     this.formRef.current.validateFields()
     .then( values => {
       dispatch({
-        type: 'cards/addOne',
+        type: 'articles/addOne',
         payload: values,
+      })
+      .then(res => {
+        message.info(res.message);
+        this.loadData();
       });
       // 重置 `visible` 属性为 false 以关闭对话框
       this.setState({ visible: false });
@@ -59,6 +64,8 @@ class List extends React.Component {
     this.props.dispatch({
       type: 'articles/queryInitArticle',
       payload: queryParam,
+    }).then(() => {
+      this.pagination.total = this.props.total
     }).catch(err => console.log(err));
   }
 
@@ -98,8 +105,9 @@ class List extends React.Component {
   pagination = {
     defaultPageSize: 5,
     showTotal: total => `共有 ${total} 条数据`,
-    pageSizeOptions: ['10', '20', '50', '100'],
-    showSizeChanger: true
+    pageSizeOptions: ['5', '10', '20', '50'],
+    showSizeChanger: true,
+    total: this.props.total
   };
 
   render() {
